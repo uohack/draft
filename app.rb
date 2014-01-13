@@ -4,6 +4,7 @@ require 'connection_pool'
 require 'json'
 require 'omniauth'
 require 'omniauth-twitter'
+require 'active_support/all'
 
 require 'dotenv'
 Dotenv.load
@@ -75,7 +76,8 @@ class App < Sinatra::Base
     		redirect session['pre_auth_path']
     		session['pre_auth_path'] = nil
     	else
-    		erb "<h1>#{params[:provider]}</h1><pre>#{JSON.generate(request.env['omniauth.auth'])}</pre>"
+    		puts JSON.generate(request.env['omniauth.auth'])
+    		redirect '/'
     	end
 
   	end
@@ -134,7 +136,7 @@ class App < Sinatra::Base
 	end
 
 	post '/:post_id' do
-		throw(:halt, [401, "Not authorized\n"]) unless session[:authenticated] == true and !session[:nickname].nil?
+		throw(:halt, [401, "Not authorized. Please log in and try again.\n"]) unless session[:authenticated] == true and !session[:nickname].nil?
 
 		REDIS.with{ |redis| 
 			key = "post:#{params['post_id']}"

@@ -9,3 +9,4 @@ gem 'connection_pool'
 gem 'activesupport'
 gem 'celluloid'
 gem 'dotenv'
+

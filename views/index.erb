@@ -1,3 +1,8 @@
 <h1>Welcome!</h1>
 
-<a href='/auth/twitter'>Login</a><br>
+<% if session[:authenticated] == true %>
+	Hi, <%= session[:nickname] %>! &bull; <a href="/logout">Logout</a>
+<% else %>
+
+	<a href='/auth/twitter'>Login</a><br>
+<% end %>
