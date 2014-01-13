@@ -1,4 +1,81 @@
+<html>
+<head>
+<style>
+	
+	#holder { 
+		font-family: Helvetica;
+		border: 10px dashed #CCC;
+		width: 360px;
+		height: 150px;
+		margin: 50px auto;
+		font-size: 20px;
+		text-align: center;
+		padding-top: 100px;
+		padding-left: 70px;
+		padding-right: 70px;
+		line-height: 1.4em;
+	}
+	#holder.hover { 
+		border: 10px dashed #F33; 
+	}
+	#html, #submit-button {
+		position: fixed;
+		width: 1px;
+		height: 1px;
+		left: -50px;
+		top: -50px;
+	}
+	pre {
+		display: inline;
+	}
+</style>
+<script>
+window.onload = function() {
+	// based heavily on: http://jsfiddle.net/jimschubert/DqcUg/
+
+	var holder = document.getElementById('holder'),
+	    html = document.getElementById('html');
+
+	if (typeof window.FileReader === 'undefined') {
+	    holder.innerHTML = 'FileReader not availble :(';
+	    // TODO: LOG THIS!
+	} else {
+	    holder.innerHTML = "Drag and drop your <pre>.html</pre> file here.<br>It'll be automatically uploaded.";
+	}
+
+	holder.ondragover = function() {
+	    this.className = 'hover';
+	    return false;
+	};
+	holder.ondragend = function() {
+	    this.className = '';
+	    return false;
+	};
+	holder.ondrop = function(e) {
+	    this.className = '';
+	    e.preventDefault();
+
+	    var file = e.dataTransfer.files[0],
+	        reader = new FileReader();
+	    reader.onload = function(event) {
+	        console.log(event.target);
+	        html.innerText = event.target.result;
+	        document.getElementById("submit-button").click();
+	    };
+	    console.log(file);
+	    reader.readAsText(file);
+
+	    return false;
+	};
+}
+</script>
+</head>
+
 <form method="POST" action="/<%= post_id %>">
-  <textarea name="html"><%= html %></textarea>
-  <input type="submit">Update</input>
+	<div id="status"></div>
+	<div id="holder"></div>	
+	<textarea id="html" name="html"><%= html %></textarea>	
+	<input id="submit-button" type="submit"></input>
 </form>
+</body>
+</html>
