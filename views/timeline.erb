@@ -1,0 +1,5 @@
+<ul>
+<% events.each do |event| %>
+	<li><%= Time.at(event['time'] || 0).strftime("%B %e at %l:%M %p").gsub("AM", "a.m.").gsub("PM", "p.m.") %> - <a href="/u/<%= event['nickname'] %>"><%= event['nickname'] %></a> edited <a href="/<%= event['post_id'] %>"><%= event['post_id'] %></a></li>
+<% end %>
+</ul>

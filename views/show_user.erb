@@ -1,0 +1,7 @@
+<img src="<%= user['info']['image'] %>">
+<h2><%= user['info']['name'] %></h2>
+<ul>
+<% posts.each do |post| %>
+	<li><a href="/<%= post %>"><%= post %></a></li>
+<% end %>
+</ul>
