@@ -1,11 +1,47 @@
-<h1>Welcome!</h1>
+<div class="row">
+	<div class="col-sm-6">
+		<p>Host HTML files online with minimal fuss. It's very new, so hopefully it doesn't crash :)</p>	
+	</div>
+</div>
 
-<% if session[:authenticated] == true %>
-	Hi, <%= session[:nickname] %>! &bull; <a href="/logout">Logout</a>
-<% else %>
+<hr>
 
-	<a href='/auth/twitter'>Login</a><br>
-<% end %>
+<div class="row">
+	<div class="col-sm-6">
 
-<a href="https://github.com/uohack/playpen">code for this site</a>
+		<div class="panel panel-default">
+		  <div class="panel-heading"><h3 class="panel-title">Getting Started</h3></div>
+		  <div class="panel-body">
+			<ol class="home-intro-list">
+				<li><a href="http://www.sublimetext.com/">Download Sublime Text</a> (it's free)</li>
+				<li><a href='/auth/twitter'>Login</a> with Twitter</li>
+				<li>Open Sublime Text, make a new file. Save the (empty) file to your Desktop as <code>test.html</code></li>
+				<li><a href="https://gist.github.com/ivarvong/8409730/raw/a9df7a5d863fc94e1f4a70165277d260a2586556/example.html">Grab some example HTML/CSS</a> and paste it in to your text editor.</li>
+				<li>Make a new post on Playpen. To this, just to go http://playpen.uohack.com/<b>change-this-to-something-else</b>. You'll see it says "Not found".</li>
+				<li>Now, add <code>/edit</code> to the end, like this: http://playpen.uohack.com/whatever-you-want<b>/edit</b></li>
+				<li>Drag and drop your <code>test.html</code> file from your Desktop onto this box. It should show you the page! You did it!</li>
+				<li>Make a change in your test editor, save the file, then repeat the last steps to re-upload it.</li>
+				<li>Tweet your first page! Use <a href="https://twitter.com/search?q=%23uohack&src=typd&f=realtime">#uohack</a>.</li>
+			<ol>
+		  </div>
+		</div>
+
+		<div class="panel panel-default">
+		  <div class="panel-heading"><h3 class="panel-title">Got it! Now what?</h3></div>
+		  <div class="panel-body">
+				<ul>
+					<li>Make a page with at least one <code>h1</code> tag and one <code>img</code> tag.</li>
+					<li>Blah</li>
+				</ul>
+		  </div>
+		</div>
+
+	</div><!-- .col-sm-6 -->
+	<div class="col-sm-6">
+		<a class="twitter-timeline" href="https://twitter.com/search?q=uohack" data-widget-id="422882634314702849">Tweets about "uohack"</a>
+	</div>
+</div><!-- .row -->
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 

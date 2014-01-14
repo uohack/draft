@@ -1,0 +1,51 @@
+<!doctype>
+<html>
+<head>
+	<title>uohack</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<!-- code for this site: https://github.com/uohack/playpen -->
+	
+	<div class="container">
+	
+		<nav class="navbar" role="navigation">
+			<ul class="nav nav-pills">
+				<li><a href="/">Home</a></li>
+				<li><a href="/users">Users</a></li>
+				<li><a href="/timeline">Timeline</a></li>
+				<% if session[:authenticated] == true %>
+					<li><a href="#">Hi, @<%= session[:nickname] %>!</a></li>
+					<li><a href="/logout">Logout</a></li>
+				<% else %>
+					<li><a href='/auth/twitter'>Login</a></nav>
+				<% end %>
+			</ul>
+		</nav>
+
+		<%= yield %>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.nav a[href="'+ window.location.pathname +'"]').parent().addClass('active');
+		});
+	</script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-37994107-1']);
+	  _gaq.push(['_setDomainName', 'uohack.com']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</body>
+</html>

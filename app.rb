@@ -92,14 +92,10 @@ class App < Sinatra::Base
 		REDIS.with{ |redis|  
 			user = JSON.parse(redis.get("user:#{params['user_id']}"))
 			posts = redis.smembers("user:#{params['user_id']}:posts").map{|post_id|
-				post_id.to_s.split(":")[1]
+				post_id.to_s.split(":")[1] #TODO: fix this! better hope people aren't using : in their post names. FIXME
 			}
 		}
 		erb :show_user, locals: {user: user, posts: posts}
-	end
-
-	get '/favicon.ico' do
-		nil
 	end
 
 	get '/timeline' do
@@ -116,6 +112,7 @@ class App < Sinatra::Base
 		html = get_post(params['post_id'])
 		if !html.nil?
 			record_pageview(params['post_id'])
+			# inject stuff into html here? or not.
 			return html
 		else
 			status 404
@@ -125,7 +122,7 @@ class App < Sinatra::Base
 
 	get '/:post_id/edit' do
 		if session[:authenticated] == true
-			erb :edit_page, locals: {
+			erb :edit_page, layout: false, locals: {
 				html: get_post(params['post_id']) || '',
 				post_id: params['post_id']
 			}
