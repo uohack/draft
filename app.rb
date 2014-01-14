@@ -116,7 +116,7 @@ class App < Sinatra::Base
 			return html
 		else
 			status 404
-			erb :not_found
+			erb :not_found, locals: { post_id: params['post_id'] }
 		end
 	end
 
